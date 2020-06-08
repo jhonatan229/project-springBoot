@@ -18,6 +18,7 @@ public enum OrderStatus {
 		return code;
 	}
 	
+	//busca por um codigo nos enums, e retorna um tipo order status do devido codigo
 	public static OrderStatus valueOf(int value) {
 		for(OrderStatus os : OrderStatus.values()) {
 			if(os.getCode() == value) {
