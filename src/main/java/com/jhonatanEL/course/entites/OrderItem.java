@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jhonatanEL.course.entites.pk.OrderItemPK;
 
 @Entity
@@ -13,8 +14,9 @@ import com.jhonatanEL.course.entites.pk.OrderItemPK;
 public class OrderItem implements Serializable{
 private static final long serialVersionUID = 1L;
     
+    //esta dizendo que esta é uma classe auxiliar que reprecenta product e Order precisando ter um id pra pegar as duas 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
 	private Integer quantity;
 	private Double price;
 	
@@ -29,6 +31,7 @@ private static final long serialVersionUID = 1L;
 		this.price = price;
 	}
 
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}

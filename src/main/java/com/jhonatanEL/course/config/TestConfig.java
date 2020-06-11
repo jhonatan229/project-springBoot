@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.jhonatanEL.course.entites.Category;
 import com.jhonatanEL.course.entites.Order;
+import com.jhonatanEL.course.entites.OrderItem;
 import com.jhonatanEL.course.entites.Product;
 import com.jhonatanEL.course.entites.User;
 import com.jhonatanEL.course.entites.enums.OrderStatus;
 import com.jhonatanEL.course.repositories.CategoryRepository;
+import com.jhonatanEL.course.repositories.OrderItemRepository;
 import com.jhonatanEL.course.repositories.OrderRepository;
 import com.jhonatanEL.course.repositories.ProductRepository;
 import com.jhonatanEL.course.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	//passa os objetos do user para o banco de dados h2
 	@Override
@@ -70,5 +75,13 @@ public class TestConfig implements CommandLineRunner {
 		p5.getCategories().add(cat2);
 		
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+	
+	 
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+	
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 	}
 }
